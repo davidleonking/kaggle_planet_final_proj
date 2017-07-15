@@ -41,7 +41,7 @@ import matplotlib.image as mpimg
 
 import data_helper
 from keras_helper import AmazonKerasClassifier
-from kaggle_data.downloader import KaggleDataDownloader
+#from kaggle_data.downloader import KaggleDataDownloader
 
 #%matplotlib inline
 #%config InlineBackend.figure_format = 'retina'
@@ -77,33 +77,33 @@ for dir_path in datasets_path:
     if os.path.exists(dir_path):
         is_datasets_present = True
 
-if not is_datasets_present:
-    # Put your Kaggle user name and password in a $KAGGLE_USER and $KAGGLE_PASSWD env vars respectively
-    downloader = KaggleDataDownloader(os.getenv("KAGGLE_USER"), os.getenv("KAGGLE_PASSWD"), competition_name)
-    
-    train_output_path = downloader.download_dataset(train, destination_path)
-    downloader.decompress(train_output_path, destination_path) # Outputs a tar file
-    downloader.decompress(destination_path + train_u, destination_path) # Extract the content of the previous tar file
-    os.remove(train_output_path) # Removes the 7z file
-    os.remove(destination_path + train_u) # Removes the tar file
-    
-    test_output_path = downloader.download_dataset(test, destination_path)
-    downloader.decompress(test_output_path, destination_path) # Outputs a tar file
-    downloader.decompress(destination_path + test_u, destination_path) # Extract the content of the previous tar file
-    os.remove(test_output_path) # Removes the 7z file
-    os.remove(destination_path + test_u) # Removes the tar file
-    
-    test_add_output_path = downloader.download_dataset(test_additional, destination_path)
-    downloader.decompress(test_add_output_path, destination_path) # Outputs a tar file
-    downloader.decompress(destination_path + test_additional_u, destination_path) # Extract the content of the previous tar file
-    os.remove(test_add_output_path) # Removes the 7z file
-    os.remove(destination_path + test_additional_u) # Removes the tar file
-    
-    test_labels_output_path = downloader.download_dataset(test_labels, destination_path)
-    downloader.decompress(test_labels_output_path, destination_path) # Outputs a csv file
-    os.remove(test_labels_output_path) # Removes the zip file
-else:
-    print("All datasets are present.")
+# if not is_datasets_present:
+#     # Put your Kaggle user name and password in a $KAGGLE_USER and $KAGGLE_PASSWD env vars respectively
+#     downloader = KaggleDataDownloader(os.getenv("KAGGLE_USER"), os.getenv("KAGGLE_PASSWD"), competition_name)
+#
+#     train_output_path = downloader.download_dataset(train, destination_path)
+#     downloader.decompress(train_output_path, destination_path) # Outputs a tar file
+#     downloader.decompress(destination_path + train_u, destination_path) # Extract the content of the previous tar file
+#     os.remove(train_output_path) # Removes the 7z file
+#     os.remove(destination_path + train_u) # Removes the tar file
+#
+#     test_output_path = downloader.download_dataset(test, destination_path)
+#     downloader.decompress(test_output_path, destination_path) # Outputs a tar file
+#     downloader.decompress(destination_path + test_u, destination_path) # Extract the content of the previous tar file
+#     os.remove(test_output_path) # Removes the 7z file
+#     os.remove(destination_path + test_u) # Removes the tar file
+#
+#     test_add_output_path = downloader.download_dataset(test_additional, destination_path)
+#     downloader.decompress(test_add_output_path, destination_path) # Outputs a tar file
+#     downloader.decompress(destination_path + test_additional_u, destination_path) # Extract the content of the previous tar file
+#     os.remove(test_add_output_path) # Removes the 7z file
+#     os.remove(destination_path + test_additional_u) # Removes the tar file
+#
+#     test_labels_output_path = downloader.download_dataset(test_labels, destination_path)
+#     downloader.decompress(test_labels_output_path, destination_path) # Outputs a csv file
+#     os.remove(test_labels_output_path) # Removes the zip file
+# else:
+#     print("All datasets are present.")
 
 # <markdowncell>
 
