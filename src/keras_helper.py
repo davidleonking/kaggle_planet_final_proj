@@ -15,7 +15,7 @@ from tensorflow.contrib.keras import backend
 
 class LossHistory(Callback):
     def __init__(self):
-        super(self).__init__()
+        super().__init__()
         self.train_losses = []
         self.val_losses = []
 
@@ -30,7 +30,7 @@ class AmazonKerasClassifier:
         self.classifier = Sequential()
 
     def add_conv_layer(self, img_size=(32, 32), img_channels=3):
-        self.classifier.add(BatchNormalization(input_shape=(img_size, img_channels)))
+        self.classifier.add(BatchNormalization(input_shape=(*img_size, img_channels)))
 
         self.classifier.add(Conv2D(32, (3, 3), padding='same', activation='relu'))
         self.classifier.add(Conv2D(32, (3, 3), activation='relu'))
@@ -86,7 +86,7 @@ class AmazonKerasClassifier:
                             epochs=epoch,
                             verbose=1,
                             validation_data=(X_valid, y_valid),
-                            callbacks=[history, train_callbacks, earlyStopping])
+                            callbacks=[history, *train_callbacks, earlyStopping])
         fbeta_score = self._get_fbeta_score(self.classifier, X_valid, y_valid)
         return [history.train_losses, history.val_losses, fbeta_score]
 

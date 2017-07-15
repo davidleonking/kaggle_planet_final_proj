@@ -43,8 +43,8 @@ import data_helper
 from keras_helper import AmazonKerasClassifier
 from kaggle_data.downloader import KaggleDataDownloader
 
-# %matplotlib inline
-# %config InlineBackend.figure_format = 'retina'
+#%matplotlib inline
+#%config InlineBackend.figure_format = 'retina'
 
 # <markdowncell>
 
@@ -52,7 +52,7 @@ from kaggle_data.downloader import KaggleDataDownloader
 
 # <codecell>
 
-print tf.__version__
+tf.__version__
 
 # <markdowncell>
 
@@ -193,7 +193,7 @@ gc.collect();
 
 print("x_train shape: {}".format(x_train.shape))
 print("y_train shape: {}".format(y_train.shape))
-# y_map
+y_map
 
 # <markdowncell>
 
@@ -235,7 +235,7 @@ classifier.add_flatten_layer()
 classifier.add_ann_layer(len(y_map))
 
 train_losses, val_losses = [], []
-epochs_arr = 100 # [10, 5, 5]
+epochs_arr = [10, 5, 5]
 learn_rates = [0.001, 0.0001, 0.00001]
 for learn_rate, epochs in zip(learn_rates, epochs_arr):
     tmp_train_losses, tmp_val_losses, fbeta_score = classifier.train_model(x_train, y_train, learn_rate, epochs, 
