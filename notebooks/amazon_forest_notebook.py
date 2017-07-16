@@ -63,10 +63,10 @@ tf.__version__
 
 competition_name = "planet-understanding-the-amazon-from-space"
 
-train, train_u = "train-jpg.tar.7z", "train-jpg.tar"
-test, test_u = "test-jpg.tar.7z", "test-jpg.tar"
-test_additional, test_additional_u = "test-jpg-additional.tar.7z", "test-jpg-additional.tar"
-test_labels = "train_v2.csv.zip"
+# train, train_u = "train-jpg.tar.7z", "train-jpg.tar"
+# test, test_u = "test-jpg.tar.7z", "test-jpg.tar"
+# test_additional, test_additional_u = "test-jpg-additional.tar.7z", "test-jpg-additional.tar"
+# test_labels = "train_v2.csv.zip"
 destination_path = "../input/"
 is_datasets_present = False
 
@@ -147,17 +147,17 @@ sns.barplot(x=labels_s, y=labels_s.index, orient='h')
 
 # <codecell>
 
-images_title = [labels_df[labels_df['tags'].str.contains(label)].iloc[i]['image_name'] + '.jpg' 
-                for i, label in enumerate(labels_set)]
-
-plt.rc('axes', grid=False)
-_, axs = plt.subplots(5, 4, sharex='col', sharey='row', figsize=(15, 20))
-axs = axs.ravel()
-
-for i, (image_name, label) in enumerate(zip(images_title, labels_set)):
-    img = mpimg.imread(train_jpeg_dir + '/' + image_name)
-    axs[i].imshow(img)
-    axs[i].set_title('{} - {}'.format(image_name, label))
+# images_title = [labels_df[labels_df['tags'].str.contains(label)].iloc[i]['image_name'] + '.jpg'
+#                 for i, label in enumerate(labels_set)]
+#
+# plt.rc('axes', grid=False)
+# _, axs = plt.subplots(5, 4, sharex='col', sharey='row', figsize=(15, 20))
+# axs = axs.ravel()
+#
+# for i, (image_name, label) in enumerate(zip(images_title, labels_set)):
+#     img = mpimg.imread(train_jpeg_dir + '/' + image_name)
+#     axs[i].imshow(img)
+#     axs[i].set_title('{} - {}'.format(image_name, label))
 
 # <markdowncell>
 
@@ -217,7 +217,7 @@ checkpoint = ModelCheckpoint(filepath, monitor='val_acc', verbose=1, save_best_o
 # <codecell>
 
 validation_split_size = 0.2
-batch_size = 128
+batch_size = 256
 
 # <markdowncell>
 
@@ -236,7 +236,7 @@ classifier.add_ann_layer(len(y_map))
 
 train_losses, val_losses = [], []
 epochs_arr = [10, 5, 5]
-learn_rates = [0.001, 0.0001, 0.00001]
+learn_rates = [0.002, 0.0001, 0.00001]
 for learn_rate, epochs in zip(learn_rates, epochs_arr):
     tmp_train_losses, tmp_val_losses, fbeta_score = classifier.train_model(x_train, y_train, learn_rate, epochs, 
                                                                            batch_size, validation_split_size=validation_split_size, 

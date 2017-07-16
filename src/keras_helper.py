@@ -33,7 +33,8 @@ class AmazonKerasClassifier:
         self.classifier.add(BatchNormalization(input_shape=(*img_size, img_channels)))
 
         self.classifier.add(Conv2D(32, (3, 3), padding='same', activation='relu'))
-        self.classifier.add(Conv2D(32, (3, 3), activation='relu'))
+        self.classifier.add(Conv2D(32, (3, 3), padding='same', activation='sigmoid'))
+        self.classifier.add(Conv2D(32, (3, 3), activation='sigmoid'))
         self.classifier.add(MaxPooling2D(pool_size=2))
         self.classifier.add(Dropout(0.25))
 
@@ -42,8 +43,8 @@ class AmazonKerasClassifier:
         self.classifier.add(MaxPooling2D(pool_size=2))
         self.classifier.add(Dropout(0.25))
 
-        self.classifier.add(Conv2D(128, (3, 3), padding='same', activation='relu'))
-        self.classifier.add(Conv2D(128, (3, 3), activation='relu'))
+        self.classifier.add(Conv2D(128, (3, 3), padding='same', activation='sigmoid'))
+        self.classifier.add(Conv2D(128, (3, 3), activation='sigmoid'))
         self.classifier.add(MaxPooling2D(pool_size=2))
         self.classifier.add(Dropout(0.25))
 
